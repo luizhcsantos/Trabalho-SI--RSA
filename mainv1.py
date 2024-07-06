@@ -1,6 +1,11 @@
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization
 
+
+# Programa que gera uma chave pública e uma privada
+# utilizando o algortimo RSA da biblioteca 'cryptography'
+
+
 # Gera chave privada
 private_key = rsa.generate_private_key(
     public_exponent=65537,

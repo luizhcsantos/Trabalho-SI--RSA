@@ -1,6 +1,10 @@
 import random
 from sympy import isprime, mod_inverse
 
+# Programa que gera uma chave pública e uma privada
+
+
+
 def generate_prime_candidate(length):
     # Gera um número ímpar aleatório
     p = random.getrandbits(length)
