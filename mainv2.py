@@ -5,30 +5,30 @@ from sympy import isprime, mod_inverse
 
 
 
-def generate_prime_candidate(length):
+def gerar_candidato_primo(comprimento):
     # Gera um número ímpar aleatório
-    p = random.getrandbits(length)
+    p = random.getrandbits(comprimento)
     # Aplica máscara para garantir comprimento correto
-    p |= (1 << length - 1) | 1
+    p |= (1 << comprimento - 1) | 1
     return p
 
-def generate_prime_number(length=1024):
+def gerar_numero_primo(comprimento=1024):
     p = 4
     # Continua até que seja um número primo
     while not isprime(p):
-        p = generate_prime_candidate(length)
+        p = gerar_candidato_primo(comprimento)
     return p
 
-def generate_rsa_keys(bit_length=1024):
-    p = generate_prime_number(bit_length // 2)
-    q = generate_prime_number(bit_length // 2)
+def gerar_chave_rsa(comprimento_bit=1024):
+    p = gerar_numero_primo(comprimento_bit // 2)
+    q = gerar_numero_primo(comprimento_bit // 2)
     n = p * q
     phi = (p - 1) * (q - 1)
     e = 65537
     d = mod_inverse(e, phi)
     return ((e, n), (d, n))
 
-public_key, private_key = generate_rsa_keys()
+chave_publica, chave_privada = gerar_chave_rsa()
 
-print(f"Public Key: {public_key}")
-print(f"Private Key: {private_key}")
+print(f"Chave pública: {chave_publica}")
+print(f"Chave privada: {chave_privada}")

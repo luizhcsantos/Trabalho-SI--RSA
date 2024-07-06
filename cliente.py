@@ -35,7 +35,7 @@ chave_privada, chave_publica = gerar_chave_dh(primo, gerador)
 socket_cliente.sendall(f'{chave_publica}'.encode())
 chave_publica_servidor = int(socket_cliente.recv(1024).decode())
 chave_compartilhada = calcular_chave_compartilhada(chave_privada, chave_publica_servidor, primo)
-print('Chave compartilhada estabelecida:', chave_compartilhada.hex())
+# print('Chave compartilhada estabelecida:', chave_compartilhada.hex())
 
 # Função para criptografar mensagens
 def criptografar_mensagem(chave, mensagem):
@@ -45,10 +45,10 @@ def criptografar_mensagem(chave, mensagem):
     iv = cifra.iv
     mensagem_encriptada = iv + mensagem_cifrada
     hash_integridade = sha256(mensagem_encriptada).hexdigest()
-    print(f'IV: {iv.hex()}')
-    print(f'Texto cifrado: {mensagem_cifrada.hex()}')
-    print(f'Texto preenchido: {mensagem_preenchida.hex()}')
-    print(f'Hash de integridade: {hash_integridade}')
+    # print(f'IV: {iv.hex()}')
+    # print(f'Texto cifrado: {mensagem_cifrada.hex()}')
+    # print(f'Texto preenchido: {mensagem_preenchida.hex()}')
+    # print(f'Hash de integridade: {hash_integridade}')
     return mensagem_encriptada + hash_integridade.encode()
 
 # Função para descriptografar mensagens
@@ -59,9 +59,9 @@ def descriptografar_mensagem(chave, mensagem_cifrada):
     hash_integridade_calculado = sha256(iv + mensagem_cifrada_real).hexdigest()
     if hash_integridade_recebido != hash_integridade_calculado:
         raise ValueError("Hash de integridade não corresponde")
-    print(f'Recebido IV: {iv.hex()}')
-    print(f'Texto cifrado: {mensagem_cifrada_real.hex()}')
-    print(f'Recebido hash de integridade: {hash_integridade_recebido}')
+    # print(f'Recebido IV: {iv.hex()}')
+    # print(f'Texto cifrado: {mensagem_cifrada_real.hex()}')
+    # print(f'Recebido hash de integridade: {hash_integridade_recebido}')
     cifra = AES.new(chave, AES.MODE_CBC, iv)
     mensagem_preenchida = cifra.decrypt(mensagem_cifrada_real)
     mensagem_decifrada = unpad(mensagem_preenchida, AES.block_size)
